@@ -9,7 +9,7 @@ Designed to boot via GRUB2 and run in QEMU for simulation
 - 64-bit bootable kernel (NASM-based)
 - GRUB multiboot2 
 - ELF64 binary output
-- Bootabl ISO image generation
+- Bootable ISO image generation
 - QEMU for virtualization support
 
 
@@ -33,9 +33,21 @@ Designed to boot via GRUB2 and run in QEMU for simulation
 All required system packages are listed in [`packages.txt`](./packages.txt).
 
 <details>
-<summary><strong>✅ Debian / Ubuntu</strong></summary>
+<summary><strong> Debian / Ubuntu</strong></summary>
 
 ```bash
 sudo xargs -a packages.txt apt install -y
-</details> <details> <summary><strong>✅ Arch Linux / Manjaro</strong></summary>
+```
+
+</details> <details> <summary><strong> Arch Linux / Manjaro</strong></summary>
+
+```bash
 sudo pacman -S --needed $(< packages.txt)
+```
+</details> <details> <summary><strong> MacOs </strong></summary>
+
+```bash
+xargs brew install < packages.txt
+```
+NOTE: GRUB is not officially supported via Homebrew.
+For ISO generation, consider using a Linux VM or Docker container
