@@ -27,3 +27,15 @@ Designed to boot via GRUB2 and run in QEMU for simulation
 
 
 ---
+
+## Dependencies 
+
+All required system packages are listed in [`packages.txt`](./packages.txt).
+
+<details>
+<summary><strong>✅ Debian / Ubuntu</strong></summary>
+
+```bash
+sudo xargs -a packages.txt apt install -y
+</details> <details> <summary><strong>✅ Arch Linux / Manjaro</strong></summary>
+sudo pacman -S --needed $(< packages.txt)
