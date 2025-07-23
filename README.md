@@ -12,7 +12,7 @@ Designed to boot via GRUB2 and run in QEMU for simulation
 - Bootable ISO image generation
 - QEMU for virtualization support
 
----
+
 
 ## Current stage
 - Working on : setting up paging for 64-bit
