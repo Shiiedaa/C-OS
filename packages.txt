@@ -1,0 +1,8 @@
+nasm
+grub-pc-bin
+grub-common
+xorriso
+qemu-system-x86
+gcc
+make
+binutils

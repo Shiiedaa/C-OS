@@ -22,5 +22,5 @@ iso/
 # GRUB-related
 target/x86_64/iso/boot/grub/grub.cfg
 
-# Don't ignore this placeholder
+
 !target/.gitkeep
