@@ -83,7 +83,7 @@ setup_page_tables:
     mov [page_table_l2 + ecq * 8], eax
 
     inc ecx ;increment counter
-    cmp ecq, 512 ;check if table is mapped
+    cmp ecx, 512 ;check if table is mapped
     jne .loop ; if not, continue
     
     ret
