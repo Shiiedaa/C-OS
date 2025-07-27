@@ -88,6 +88,31 @@ setup_page_tables:
     
     ret
 
+enable_paging:
+    ;pass page table location to cpu 
+    mov eax, page_table_l4
+    mov cr3, eax
+
+    ;enable PAE 
+    mov eax, cr4
+    or eax, 1 << 5 ;pae flag
+    mov cr4, eax
+    
+
+    ;enable long mode
+    mov ecx, 0xC0000080
+    rdmsr
+    or eax, 1 << 8  ; longmode flag
+    wrmsr 
+
+    ;enable paging 
+    mov eax, cr0
+    or eax, 1 << 31 ; paging bit
+    mov cr0, eax
+
+    ret
+
+
 ; writes "ERROR: " plus the specific code 
 error:
     mov dword [0xb8000], 0x4f524f45
