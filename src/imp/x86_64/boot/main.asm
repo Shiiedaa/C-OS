@@ -19,8 +19,7 @@ start:
     lgdt [gdt64.pointer]
     jmp gdt64.code_segment:long_mode_start
 
-    ; print 'ok'
-    mov dword [0xb8000], 0x2f4b2f4f
+    
     hlt
 
 check_multiboot:
@@ -47,7 +46,7 @@ check_cpuid:
     je .no_cpuid
     ret
 
-no_cpuid:
+.no_cpuid:
     mov al, "C"
     jmp error
 
@@ -84,7 +83,7 @@ setup_page_tables:
     mov eax, 0x200000 ; 2Mib
     mul ecx 
     or eax, 0b10000011 
-    mov [page_table_l2 + ecq * 8], eax
+    mov [page_table_l2 + ecx * 8], eax
 
     inc ecx ;increment counter
     cmp ecx, 512 ;check if table is mapped
@@ -122,7 +121,7 @@ error:
     mov dword [0xb8000], 0x4f524f45
     mov dword [0xb8004], 0x4f3a4f52
     mov dword [0xb8008], 0x4f204f20
-    mov dword [0xb800a], al
+    mov byte [0xb800a], al
     hlt
 
 
@@ -145,7 +144,7 @@ section .rodata ;read only
 ;global descriptive table
 gdt64:
     dq 0 ; zero entry
-.code_segment: equ $ - g - gdt64
+.code_segment: equ $ - gdt64
     dq (1 << 43) | (1 << 44) | (1 << 47) | (1 << 53) 
 .pointer:
     dw $ - gdt64 - 1 ; length = current memory address/ end of the table($) - start of the table (gdt64) 
