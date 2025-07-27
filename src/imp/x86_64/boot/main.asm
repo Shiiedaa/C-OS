@@ -136,3 +136,13 @@ page_table_l2:
 stack_bottom:
     resb 4096 * 4 
 stack_top: 
+
+section .rodata ;read only
+;global descriptive table
+gdt64:
+    dq 0 ; zero entry
+.code_segment: equ $ - g - gdt64
+    dq (1 << 43) | (1 << 44) | (1 << 47) | (1 << 53) 
+.pointer:
+    dw $ - gdt64 - 1 ; length = current memory address/ end of the table($) - start of the table (gdt64) 
+    dq gdt64
