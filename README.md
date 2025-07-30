@@ -15,7 +15,7 @@ Designed to boot via GRUB2 and run in QEMU for simulation
 
 
 ## Current stage
-- Working on : setting up paging for 64-bit
+- Working on : auto printing features
 
 ---
 
