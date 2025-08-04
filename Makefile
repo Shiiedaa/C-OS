@@ -1,7 +1,19 @@
+
+kernel_source_files := $(shell find src/imp/kernel -name '*.c') 
+kernel_object_files := $(patsubst src/imp/kernel/%.c, build/kernel/%.o, $(kernel_source_files))
+
+
+x86_64_c_source_files := $(shell find src/imp/x86_64 -name '*.c') 
+x86_64_c_object_files := $(patsubst src/imp/x86_64/%.c, build/x86_64/%.o, $(x86_64_c_source_files))
+
+
+
 #search all .asm files inside path
 x86_64_asm_source_files := $(shell find src/imp/x86_64 -name '*.asm') 
 #convert .asm src path to .o object file path in dir
 x86_64_asm_object_files := $(patsubst src/imp/x86_64/%.asm, build/x86_64/%.o, $(x86_64_asm_source_files))
+
+x86_64_object_files := $(x86_64_c_object_files) $(x86_64_asm_object_files)
 
 #build each .o listed used src file from same name but in src path, with asm extension
 $(x86_64_asm_object_files): build/x86_64/%.o: src/imp/x86_64/%.asm
