@@ -53,18 +53,18 @@ void print_newline()
         }
     }
 
-    clear_row(NUM_COLS - 1);
+    clear_row(NUM_ROWS - 1);
 }
 
 void print_char(char character)
 {
-    if (character = '\n')
+    if (character == '\n')
     {
         print_newline();
         return;
     }
 
-    if (col > NUM_COLS)
+    if (col >= NUM_COLS)
     {
         print_newline();
     }
