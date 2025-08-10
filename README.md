@@ -56,5 +56,26 @@ xargs brew install < packages.txt
 NOTE: GRUB is not officially supported via Homebrew.
 For ISO generation, consider using a Linux VM or Docker container
 
+---
 
+## Build
 
+Enter build environment: 
+
+- Windows(PowerShell): docker run --rm -it -v "C:\Users\<username>\<filepath>\C-OS:/root/env" <buildenv_name>
+- MacOS: docker run --rm -it -v /Users/<username>/<filepath>/C-OS:/root/env <buildenv_name>
+- Linux: docker run --rm -it -v /home/<username>/<filepath>/C-OS:/root/env <buildenv_name>
+
+Build for x86 architecture: 
+
+- make build-x86_64
+
+NOTE: To leave build environment, type 'exit' in terminal.
+
+Emulate the system using Qemu: 
+
+-  qemu-system-x86_64 -cdrom dist/x86_64/kernel.iso         
+
+Qemu must be added to file path.
+ 
+---
