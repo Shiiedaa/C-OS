@@ -15,6 +15,18 @@ x86_64_asm_object_files := $(patsubst src/imp/x86_64/%.asm, build/x86_64/%.o, $(
 
 x86_64_object_files := $(x86_64_c_object_files) $(x86_64_asm_object_files)
 
+$(kernel_object_files): build/kernel/%.o: src/imp/kernel/%.c
+	mkdir -p $(dir $@) && \
+	x86_64-elf-gcc -c -I src/interface -ffreestanding $(patsubst build/kernel/%.o, src/imp/kernel/%.c, $@) -o $@
+
+
+
+$(x86_64_c_object_files): build/x86_64/%.o: src/imp/x86_64/%.c
+	mkdir -p $(dir $@) && \
+	x86_64-elf-gcc -c -I src/interface -ffreestanding $(patsubst build/x86_64/%.o, src/imp/x86_64/%.c, $@) -o $@
+
+
+
 #build each .o listed used src file from same name but in src path, with asm extension
 $(x86_64_asm_object_files): build/x86_64/%.o: src/imp/x86_64/%.asm
 	mkdir -p $(dir $@) && \
@@ -25,8 +37,8 @@ $(x86_64_asm_object_files): build/x86_64/%.o: src/imp/x86_64/%.asm
 
 
 #build bootable ISO
-build-x86_64: $(x86_64_asm_object_files)
+build-x86_64: $(kernel_object_files) $(x86_64_object_files)
 	mkdir -p dist/x86_64 && \
-	x86_64-elf-ld -n -o dist/x86_64/kernel.bin -T target/x86_64/linker.ld $(x86_64_asm_object_files) && \
+	x86_64-elf-ld -n -o dist/x86_64/kernel.bin -T target/x86_64/linker.ld $(kernel_object_files) $(x86_64_object_files) && \
 	cp dist/x86_64/kernel.bin target/x86_64/iso/boot/kernel.bin && \
 	grub-mkrescue /usr/lib/grub/i386-pc -o dist/x86_64/kernel.iso target/x86_64/iso
