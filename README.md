@@ -52,10 +52,12 @@ sudo pacman -S --needed $(< packages.txt)
 
 ```bash
 xargs brew install < packages.txt
-
+```
 NOTE: GRUB is not officially supported via Homebrew.
 For ISO generation, consider using a Linux VM or Docker container
-```
+
+<details>
+
 ---
 
 ## Build
