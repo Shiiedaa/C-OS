@@ -15,8 +15,7 @@ Designed to boot via GRUB2 and run in QEMU for simulation
 
 
 ## Current stage
-- Working on : auto printing features
-
+- Working on : User input handling
 ---
 
 ## Structure
@@ -56,7 +55,7 @@ xargs brew install < packages.txt
 NOTE: GRUB is not officially supported via Homebrew.
 For ISO generation, consider using a Linux VM or Docker container
 
-<details>
+</details>
 
 ---
 
